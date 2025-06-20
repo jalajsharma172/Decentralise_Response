@@ -30,7 +30,7 @@ import { Spinner } from "@/components/ui/spinner";
 function getTimeFrames(ticks: any[]) {
   const frames = Array(10).fill("GRAY");
 
-  const lastTicks = ticks.slice(-10);
+  const lastTicks = ticks.slice(-10).reverse();
 
   lastTicks.forEach((tick, index) => {
     frames[index] = tick.status === "BAD" ? "BAD" : "GOOD";
@@ -41,10 +41,8 @@ function getTimeFrames(ticks: any[]) {
 
 function getLatestStatus(ticks: any[]) {
   if (!ticks.length) return "GOOD";
-  const sortedTicks = [...ticks].sort(
-    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-  );
-  return sortedTicks[0].status;
+  const latestTick = ticks[ticks.length - 1];
+  return latestTick.status;
 }
 
 function getAverageLatency(ticks: any[]) {
@@ -95,12 +93,49 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto py-8">
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogTrigger asChild>
+            <Button>
+              <Plus className="h-4 w-4 mr-2" />
+              Add Website
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Add New Website</DialogTitle>
+              <DialogDescription>
+                Enter the URL of the website you want to monitor
+              </DialogDescription>
+            </DialogHeader>
+            <div className="py-4">
+              <Input
+                placeholder="https://example.com"
+                value={newWebsiteUrl}
+                onChange={(e) => setNewWebsiteUrl(e.target.value)}
+              />
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  handleNewWebsite(newWebsiteUrl);
+                  setIsDialogOpen(false);
+                  setNewWebsiteUrl("");
+                }}
+              >
+                Start Monitoring
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
         <div className="grid gap-6">
           {websites.map((website) => {
             const timeFrames = getTimeFrames(website.ticks);
             const currentStatus = getLatestStatus(website.ticks);
             const avgLatency = getAverageLatency(website.ticks);
-            const lastTick = website.ticks[0];
+            const lastTick = website.ticks[website.ticks.length - 1];
 
             return (
               <Card key={website.id} className="p-0">
