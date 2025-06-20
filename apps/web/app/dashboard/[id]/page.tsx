@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
-``;
+
 import { useAuth } from "@clerk/nextjs";
 import { jsPDF } from "jspdf";
 
@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import {
   Zap,
   CheckCircle,
@@ -75,7 +76,7 @@ interface Website {
 
 const COLORS = ["#10B981", "#F43F5E", "#F59E0B"];
 
-function isValidDate(date: any): boolean {
+function isValidDate(date: Date): boolean {
   return date instanceof Date && !isNaN(date.getTime());
 }
 
@@ -426,7 +427,7 @@ const Page = () => {
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="time" />
                       <YAxis />
-                      <Tooltip />
+
                       <Line
                         type="monotone"
                         dataKey="latency"
