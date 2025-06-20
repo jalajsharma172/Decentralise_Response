@@ -135,7 +135,7 @@ The platform consists of the following components:
 Clone the repository and install dependencies:
 
 ```sh
-git clone https://github.com/YadlaMani/wakey-wakey.git
+git clone https://github.com/jalajsharma172/wakey-wakey.git
 cd wakey-wakey
 bun install
 ```
