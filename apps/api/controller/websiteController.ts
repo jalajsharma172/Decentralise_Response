@@ -24,7 +24,8 @@ export const createWebsite = async (req: Request, res: Response) => {
         userId,
       },
     });
-    res.status(400).json({
+    console.log(website);
+    res.status(200).json({
       message: "Website created successfully",
       success: true,
       data: website,
@@ -92,6 +93,9 @@ export const getWebsites = async (req: Request, res: Response) => {
         userId,
         disabled: false,
       },
+      include: {
+        ticks: true,
+      },
     });
     res.status(200).json({
       message: "Websites found",
@@ -99,6 +103,7 @@ export const getWebsites = async (req: Request, res: Response) => {
       websites,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       message: "Internal server error",
       success: false,
