@@ -1,0 +1,46 @@
+{
+  "name": "wakey-wakey",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "turbo": "^2.4.4",
+    "typescript": "5.8.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "bun@1.2.4",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "@clerk/edge": "^1.13.2",
+    "@clerk/nextjs": "^6.12.8",
+    "@prisma/client": "^6.5.0",
+    "@radix-ui/react-toast": "^1.2.6",
+    "@solana-developers/helpers": "^2.8.1",
+    "@solana/wallet-adapter-base": "^0.9.24",
+    "@solana/wallet-adapter-react": "^0.15.36",
+    "@solana/wallet-adapter-react-ui": "^0.9.36",
+    "@solana/wallet-adapter-wallets": "^0.19.33",
+    "@types/bun": "^1.2.5",
+    "@types/nodemailer": "^6.4.17",
+    "bs58": "^6.0.0",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
+    "nodemailer": "^6.10.0",
+    "public-ip": "^7.0.1",
+    "recharts": "^2.15.1",
+    "tweetnacl": "^1.0.3",
+    "tweetnacl-util": "^0.15.1",
+    "ws": "^8.18.1"
+  }
+}
